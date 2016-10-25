@@ -28,7 +28,6 @@ class MiradorMx_Distribuidor_AccountController extends Mage_Customer_AccountCont
     }
 
 
-
     public function registerAction()
     {
 
