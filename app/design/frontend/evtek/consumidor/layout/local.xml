@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    /**
+     * local.xml
+     * Local layout modifications for local theme
+     * @category design
+     * @package evtek
+     * @copyright Copyright (c) 2016 Mariana  Valdivia
+     */
+-->
+<layout version="0.1.0">
+    <default></default>
+</layout>
+
