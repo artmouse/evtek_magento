@@ -1,4 +1,7 @@
 app/etc/local.xml
 var/*
 .idea/*
+.htaccess
+var/package/*
+var/sessions/*
 
