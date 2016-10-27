@@ -35,7 +35,7 @@ class MiradorMx_Distribuidor_Helper_Data extends Mage_Customer_Helper_Data {
 	 * @return string
 	 */
 	public function getDistribuidorRegisterPostUrl() {
-		return $this->_getUrl('customer/account/createdistribuidorpost');
+		return $this->_getUrl('customer/account/distribuidorpost');
 
 	}
 

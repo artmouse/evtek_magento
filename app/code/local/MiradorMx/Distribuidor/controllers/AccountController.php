@@ -104,7 +104,7 @@ class MiradorMx_Distribuidor_AccountController extends Mage_Customer_AccountCont
 	 * Description
 	 * @return type
 	 */
-	public function createDistribuidorPostAction() {
+	public function distribuidorPostAction() {
 
 		$errUrl = $this->_getUrl('*/*/create', array('_secure' => true));
 

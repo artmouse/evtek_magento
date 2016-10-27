@@ -34,6 +34,9 @@
                 <rewrite>
                     <form_login>MiradorMx_Distribuidor_Block_Form_Login</form_login>
                 </rewrite>
+                <rewrite>
+                    <form_register>MiradorMx_Distribuidor_Block_Form_Register</form_register>
+                </rewrite>
             </customer>
         </blocks>
         <routers>

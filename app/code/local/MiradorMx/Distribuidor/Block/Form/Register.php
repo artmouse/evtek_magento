@@ -20,7 +20,8 @@ class MiradorMx_Distribuidor_Block_Form_Register extends Mage_Customer_Block_For
 	 * @return string
 	 */
 	public function getPostActionUrl() {
-		return $this->helper('distribuidor')->getRegisterPostUrl();
+		
+		return $this->helper('customer')->getRegisterPostUrl();
 
 	}
 	/**
@@ -28,6 +29,7 @@ class MiradorMx_Distribuidor_Block_Form_Register extends Mage_Customer_Block_For
 	 * @return string
 	 */
 	public function getPostDistribuidorActionUrl() {
-		return "hola"
+		
+		return $this->helper('customer')->getDistribuidorRegisterPostUrl();
 	}
 }
