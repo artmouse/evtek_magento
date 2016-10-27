@@ -15,7 +15,11 @@ class MiradorMx_Distribuidor_AccountController extends Mage_Customer_AccountCont
 	 * @return type
 	 */
 	public function loginAction() {
-		print(Mage::getBaseUrl());
+		$store = Mage::app()->getStore();
+		$nombre = $store->getName();
+		$id = $store->getId();
+		print($nombre . " ");
+		print($id);
 		if ($this->_getSession()->isLoggedIn()) {
 			$this->_redirect('*/*/');
 			return;
@@ -42,20 +46,9 @@ class MiradorMx_Distribuidor_AccountController extends Mage_Customer_AccountCont
 		$this->renderLayout();
 	}
 	/**
-	 * Distribuidor register Form
+	 * Description
 	 * @return type
 	 */
-	public function createdistribuidorAction() {
-		if ($this->_getSession()->isLoggedIn()) {
-			$this->_redirect('*/*');
-			return;
-		}
-
-		$this->loadLayout();
-		$this->_initLayoutMessages('customer/session');
-		$this->renderLayout();
-	}
-
 	public function createPostAction() {
 
 		$errUrl = $this->_getUrl('*/*/create', array('_secure' => true));
@@ -107,10 +100,13 @@ class MiradorMx_Distribuidor_AccountController extends Mage_Customer_AccountCont
 
 		$this->_redirectError($errUrl);
 	}
+	/**
+	 * Description
+	 * @return type
+	 */
+	public function createDistribuidorPostAction() {
 
-	public function createdistribuidorPostAction() {
-
-		$errUrl = $this->_getUrl('*/*/createdistribuidor', array('_secure' => true));
+		$errUrl = $this->_getUrl('*/*/create', array('_secure' => true));
 
 		if (!$this->_validateFormKey()) {
 			$this->_redirectError($errUrl);

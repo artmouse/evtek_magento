@@ -8,14 +8,26 @@
 class MiradorMx_Distribuidor_Block_Form_Register extends Mage_Customer_Block_Form_Register {
 
 	/**
-	 * Address instance with data
-	 *
-	 * @var Mage_Customer_Model_Address
+	 * Description
+	 * @return algo
 	 */
-	protected $_address;
-
 	protected function _prepareLayout() {
 		$this->getLayout()->getBlock('head')->setTitle(Mage::helper('customer')->__('Create New Customer Account'));
 		return parent::_prepareLayout();
+	}
+	/**
+	 * Description
+	 * @return string
+	 */
+	public function getPostActionUrl() {
+		return $this->helper('distribuidor')->getRegisterPostUrl();
+
+	}
+	/**
+	 * Description
+	 * @return string
+	 */
+	public function getPostDistribuidorActionUrl() {
+		return "hola"
 	}
 }

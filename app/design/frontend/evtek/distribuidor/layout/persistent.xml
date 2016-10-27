@@ -35,13 +35,13 @@
         </reference>
     </customer_account_login>
 
-    <customer_account_createdistribuidor>
+    <customer_account_create>
         <reference name="customer_form_register">
             <action method="setTemplate"><template>persistent/customer/form/distribuidor_register.phtml</template></action>
             <block type="persistent/form_remember" name="persistent.remember.me" template="persistent/remember_me.phtml" />
             <block type="core/template" name="persistent.remember.me.tooltip" template="persistent/remember_me_tooltip.phtml" />
         </reference>
-    </customer_account_createdistribuidor>
+    </customer_account_create>
 
     <checkout_onepage_index>
         <reference name="checkout.onepage.login">
