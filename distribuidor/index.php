@@ -39,12 +39,12 @@ Whoops, it looks like you have an invalid PHP version.</h3></div><p>Magento supp
  */
 define('MAGENTO_ROOT', getcwd());
 
-$compilerConfig = MAGENTO_ROOT . '/includes/config.php';
+$compilerConfig = '../includes/config.php';
 if (file_exists($compilerConfig)) {
     include $compilerConfig;
 }
 
-$mageFilename = MAGENTO_ROOT . '/app/Mage.php';
+$mageFilename = '../app/Mage.php';
 $maintenanceFile = 'maintenance.flag';
 
 if (!file_exists($mageFilename)) {
@@ -61,23 +61,28 @@ if (file_exists($maintenanceFile)) {
     exit;
 }
 
-require MAGENTO_ROOT . '/app/bootstrap.php';
+require '../app/bootstrap.php';
 require_once $mageFilename;
 
-#Varien_Profiler::enable();
+Varien_Profiler::enable();
 
-if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
+//if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
     Mage::setIsDeveloperMode(true);
-}
+//}
 
-#ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 
 umask(0);
 
 /* Store or website code */
-$mageRunCode = isset($_SERVER['MAGE_RUN_CODE']) ? $_SERVER['MAGE_RUN_CODE'] : '';
+//$mageRunCode = isset($_SERVER['MAGE_RUN_CODE']) ? $_SERVER['MAGE_RUN_CODE'] : '';
 
 /* Run store or run website */
-$mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 'store';
+//$mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 'store';
+
+$mageRunCode = 'distribuidor';
+$mageRunType = 'website';
 
 Mage::run($mageRunCode, $mageRunType);
+//Mage::run(‘distribuidor’, ‘website’);
+
