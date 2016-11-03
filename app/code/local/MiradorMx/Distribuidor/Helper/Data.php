@@ -14,4 +14,10 @@ class MiradorMx_Distribuidor_Helper_Data extends Mage_Customer_Helper_Data {
 	public function getLoginUrl() {
 		return $this->_getUrl('customer/account/login');
 	}
+	/**
+	 *
+	 */
+	public function getSolicitudPostUrl() {
+		return $this->_getUrl('Distribuidor/registro/solicitudpost');
+	}
 }

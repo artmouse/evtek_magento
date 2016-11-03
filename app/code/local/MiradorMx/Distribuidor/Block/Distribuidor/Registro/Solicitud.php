@@ -11,4 +11,10 @@ class MiradorMx_Distribuidor_Block_Distribuidor_Registro_Solicitud extends Mage_
 		parent::__construct();
 		Mage::app()->getFrontController()->getAction()->getLayout()->getBlock('root')->setHeaderTitle(Mage::helper('distribuidor')->__('Registro para distribuidor'));
 	}
+	/**
+	 *
+	 */
+	public function getSolicitudPost() {
+		return $this->helper('distribuidor')->getSolicitudPostUrl();
+	}
 }

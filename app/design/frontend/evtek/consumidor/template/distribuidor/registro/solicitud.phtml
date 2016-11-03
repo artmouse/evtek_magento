@@ -1,1 +1,19 @@
-<h1>holi</h1>
+<h1>Regístrate</h1>
+<form method="post" action="<?php echo $this->getSolicitudPost();?>">
+	<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+	<label for="wholesale_name">Nombre</label>
+	<input type="text" name="wholesale_name" /><br>
+	<label for="wholesale_lastname">Apellido</label>
+	<input type="text" name="wholesale_lastname" /><br>
+	<label for="company_name">Empresa</label>
+	<input type="text" name="company_name" /><br>
+	<label for="company_phone">Teléfono</label>
+	<input type="text" name="company_phone" /><br>
+	<label for="company_rfc">RFC</label>
+	<input type="text" name="company_rfc" /><br>
+	<label for="wholesale_mail">Correo</label>
+	<input type="mail" name="wholesale_mail" /><br>
+	<label for="wholesale_message">Mensaje</label>
+	<textarea name="wholesale_message" rows="4" cols="50" ></textarea><br>
+  	<input type="submit" value="Enviar" />
+</form>

@@ -60,5 +60,37 @@ class MiradorMx_Distribuidor_RegistroController extends Mage_Core_Controller_Fro
 		$this->getLayout()->getBlock('root')->setPageTitle($this->__('Registro para distribuidor'));
 		$this->renderLayout();
 	}
+	/**
+	 *
+	 */
+	public function solicitudpostAction() {
+		if ($this->getRequest()->isPost()) {
+			$post = $this->getRequest()->getPost();
+			$wholesale_name = $post['wholesale_name'];
+			$wholesale_lastname = $post['wholesale_lastname'];
+			$empresa = $post['company_name'];
+			$correo = $post['wholesale_mail'];
+			$tel = $post['company_phone'];
+			$mensaje = $post['wholesale_message'];
+			$rfc = $post['company_rfc'];
+			$solicitud = Mage::getModel("distribuidor/solicitud")
+				->setName($empresa)
+				->setPhone($tel)
+				->setRfc($rfc)
+				->setCorreo($correo)
+				->setWholesalerName($wholesale_name)
+				->setWholesalerLastname($wholesale_lastname)
+				->setMensaje($mensaje);
+			try {
+
+				$solicitud->save();
+
+			} catch (Exception $error) {
+				Mage::log($error->getMessage(), null, 'solicitud_save.log');
+
+			}
+
+		}
+	}
 
 }

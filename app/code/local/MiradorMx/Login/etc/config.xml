@@ -24,11 +24,6 @@
         </layout>
     </frontend>
     <global>
-        <models>
-            <distribuidor>
-                <class>MiradorMx_Login_Model</class>
-            </distribuidor>
-        </models>
         <blocks>
             <customer>
                 <rewrite>
