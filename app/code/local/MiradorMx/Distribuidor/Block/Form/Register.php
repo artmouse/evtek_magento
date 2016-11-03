@@ -8,7 +8,7 @@
 class MiradorMx_Distribuidor_Block_Form_Register extends Mage_Customer_Block_Form_Register {
 
 	/**
-	 * Description
+	 * Algo
 	 * @return algo
 	 */
 	protected function _prepareLayout() {
@@ -16,7 +16,7 @@ class MiradorMx_Distribuidor_Block_Form_Register extends Mage_Customer_Block_For
 		return parent::_prepareLayout();
 	}
 	/**
-	 * Description
+	 * Get post action para usuario normal.
 	 * @return string
 	 */
 	public function getPostActionUrl() {
@@ -25,7 +25,7 @@ class MiradorMx_Distribuidor_Block_Form_Register extends Mage_Customer_Block_For
 
 	}
 	/**
-	 * Description
+	 * Get post action para distribuidor. 
 	 * @return string
 	 */
 	public function getPostDistribuidorActionUrl() {

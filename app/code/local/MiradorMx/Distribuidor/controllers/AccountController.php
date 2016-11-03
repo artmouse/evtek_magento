@@ -10,16 +10,15 @@ require_once Mage::getModuleDir('controllers', 'Mage_Customer') . DS . 'AccountC
  */
 class MiradorMx_Distribuidor_AccountController extends Mage_Customer_AccountController {
 
+	/**Checar**/
+	protected $_cookieCheckActions = array('loginPost', 'createpost', 'distribuidorpost');
+
 	/**
 	 * Customer login Form
 	 * @return type
 	 */
 	public function loginAction() {
-		$store = Mage::app()->getStore();
-		$nombre = $store->getName();
-		$id = $store->getId();
-		print($nombre . " ");
-		print($id);
+
 		if ($this->_getSession()->isLoggedIn()) {
 			$this->_redirect('*/*/');
 			return;
@@ -48,6 +47,7 @@ class MiradorMx_Distribuidor_AccountController extends Mage_Customer_AccountCont
 	/**
 	 * Description
 	 * @return type
+	 *
 	 */
 	public function createPostAction() {
 
@@ -105,7 +105,6 @@ class MiradorMx_Distribuidor_AccountController extends Mage_Customer_AccountCont
 	 * @return type
 	 */
 	public function distribuidorPostAction() {
-
 		$errUrl = $this->_getUrl('*/*/create', array('_secure' => true));
 
 		if (!$this->_validateFormKey()) {
@@ -132,7 +131,6 @@ class MiradorMx_Distribuidor_AccountController extends Mage_Customer_AccountCont
 
 			if (empty($errors)) {
 				$customer->cleanPasswordsValidationData();
-				$customer->setData('group_id', 2);
 				$customer->save();
 				$this->_dispatchRegisterSuccess($customer);
 				$this->_successProcessRegistration($customer);
@@ -155,6 +153,56 @@ class MiradorMx_Distribuidor_AccountController extends Mage_Customer_AccountCont
 		}
 
 		$this->_redirectError($errUrl);
+
+	}
+	/**
+	 * Description
+	 * @return type
+	 */
+	public function preDispatch() {
+
+		if (!$this->getRequest()->isDispatched()) {
+			return;
+		}
+
+		$action = strtolower($this->getRequest()->getActionName());
+		$openActions = array(
+			'create',
+			'login',
+			'logoutsuccess',
+			'forgotpassword',
+			'forgotpasswordpost',
+			'changeforgotten',
+			'resetpassword',
+			'resetpasswordpost',
+			'confirm',
+			'confirmation',
+			'distribuidorpost',
+		);
+		$pattern = '/^(' . implode('|', $openActions) . ')/i';
+
+		if (!preg_match($pattern, $action)) {
+			if (!$this->_getSession()->authenticate($this)) {
+				$this->setFlag('', 'no-dispatch', true);
+			}
+		} else {
+			$this->_getSession()->setNoReferer(true);
+		}
+	}
+
+	/**
+	 * Customer logout action
+	 */
+	public function logoutAction() {
+		$session = $this->_getSession();
+		$session->logout()->renewSession();
+
+		if (Mage::getStoreConfigFlag(Mage_Customer_Helper_Data::XML_PATH_CUSTOMER_STARTUP_REDIRECT_TO_DASHBOARD)) {
+			$session->setBeforeAuthUrl(Mage::getBaseUrl());
+		} else {
+			$session->setBeforeAuthUrl($this->_getRefererUrl());
+		}
+		$this->_redirect('*/*/logoutSuccess');
 	}
 
 }

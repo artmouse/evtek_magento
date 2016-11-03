@@ -1,60 +1,125 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <config>
-    <modules>
-        <MiradorMx_Distribuidor>
-            <version>0.1.0</version>
-        </MiradorMx_Distribuidor>
-    </modules>
-    <frontend>
-        <routers>
-            <customer>
-            <args>
-                <modules>
-                    <MiradorMx_Distribuidor before="Mage_Customer">MiradorMx_Distribuidor</MiradorMx_Distribuidor>
-                </modules>
-            </args>
-            </customer>
-        </routers>
-        <layout>
-            <updates>
-                <customer>
-                    <file>customer.xml</file>
-                </customer>
-            </updates>
-        </layout>
-    </frontend>
-    <global>
-        <models>
+	<modules>
+		<MiradorMx_Distribuidor>
+			<version>0.1.0</version>
+		</MiradorMx_Distribuidor>
+	</modules>
+	<global>
+		<models>
+			<distribuidor>
+				<class>MiradorMx_Distribuidor_Model</class>
+                <resourceModel>distribuidor_resource</resourceModel>
+			</distribuidor>
+            <distribuidor_resource>
+                <class>MiradorMx_Distribuidor_Model_Resource</class>
+                <entities>
+                    <solicitud>
+                        <table>distribuidor_solicitud_model</table>
+                    </solicitud>
+                </entities>
+            </distribuidor_resource>
+		</models>
+		<blocks>
             <distribuidor>
-                <class>MiradorMx_Distribuidor_Model</class>
+                <class>MiradorMx_Distribuidor_Block</class>
             </distribuidor>
-        </models>
-        <blocks>
-            <customer>
-                <rewrite>
-                    <form_login>MiradorMx_Distribuidor_Block_Form_Login</form_login>
-                </rewrite>
-                <rewrite>
-                    <form_register>MiradorMx_Distribuidor_Block_Form_Register</form_register>
-                </rewrite>
-            </customer>
         </blocks>
-        <routers>
-            <customer>
-                <rewrite>
-                    <distribuidor_customer_account>
-                        <from><![CDATA[#^/account/#]]></from>
-                        <to>/customer/account/</to>
-                    </distribuidor_customer_account>
-                </rewrite>
-            </customer>
-        </routers>
         <helpers>
-            <customer>
-                <rewrite>
-                    <data>MiradorMx_Distribuidor_Helper_Data</data>
-                </rewrite>
-            </customer>
+            <distribuidor>
+                <class>MiradorMx_Distribuidor_Helper</class>
+            </distribuidor>
         </helpers>
-    </global>
+        <resources>
+        <distribuidor_setup>
+                <setup>
+                    <module>MiradorMx_Distribuidor</module>
+                </setup>
+        </distribuidor_setup>
+    </resources>
+	</global>
+	<frontend>
+		<routers>
+            <distribuidor>
+                <use>standard</use>
+                <args>
+                    <module>MiradorMx_Distribuidor</module>
+                    <frontName>Distribuidor</frontName>
+                </args>
+            </distribuidor>
+		</routers>
+		<layout>
+               <updates>
+        	       <distribuidor module="MiradorMx_Distribuidor">
+                        <file>distribuidor.xml</file>
+                    </distribuidor>
+               </updates>
+        </layout>
+	</frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <distribuidor before="Mage_Adminhtml">MiradorMx_Distribuidor_Adminhtml</distribuidor>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <distribuidor translate="title" module="distribuidor">
+                                            <title>Módulo Distribuidor</title>
+                                        </distribuidor>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                        <distribuidor_options>
+                            <children>
+                                <manage translate="title" module="distribuidor">
+                                    <title>Distribuidores</title>
+                                    <sort_order>15</sort_order>
+                                </manage>
+                            </children>
+                        </distribuidor_options>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <menu>
+            <distribuidor_options translate="title" module="distribuidor">
+                <title>Distribuidores</title>
+                <sort_order>100</sort_order>
+                <children>
+                    <manage_empresa translate="title" module="distribuidor">
+                        <title>Gestión de Empresas</title>
+                        <action>adminhtml/distribuidor_empresa/</action>
+                        <sort_order>1</sort_order>
+                    </manage_empresa>
+                    <manage_solicitud translate="title" module="distribuidor">
+                        <title>Gestión de Solicitudes</title>
+                        <action>adminhtml/distribuidor_solicitud/</action>
+                        <sort_order>1</sort_order>
+                    </manage_solicitud>                    
+                    <manage_wholesale translate="title" module="distribuidor">
+                        <title>Gestión de distribuidores</title>
+                        <action>adminhtml/distribuidor_wholesale/</action>
+                        <sort_order>1</sort_order>
+                    </manage_wholesale>
+                </children>
+            </distribuidor_options>
+        </menu>
+    </adminhtml>
 </config>

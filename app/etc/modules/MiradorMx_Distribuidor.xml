@@ -1,12 +1,9 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <config>
-    <modules>
-        <MiradorMx_Distribuidor>
-            <active>true</active>
-            <codePool>local</codePool>
-        </MiradorMx_Distribuidor>
-    </modules>
-    <depends>
-        <Mage_Persistent />
-    </depends>
+	<modules>
+		<MiradorMx_Distribuidor>
+			<active>true</active>
+			<codePool>local</codePool>
+		</MiradorMx_Distribuidor>
+	</modules>
 </config>
