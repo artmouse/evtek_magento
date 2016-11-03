@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ *
+ * @category    design
+ * @package     evtek_consumidor
+ */
+-->
+<layout version="0.1.0">
+<!-- Solicitud para distribuidores -->
+  <distribuidor_registro_solicitud translate="label">
+    <update handle="general_handle"/>
+    <reference name="root">
+      <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+    </reference>
+    <reference name="content">
+      <block type="distribuidor/distribuidor_registro_solicitud" name="registro.solicitud" template="distribuidor/registro/solicitud.phtml"></block>
+    </reference>
+  </distribuidor_registro_solicitud>
+ <!-- Solicitud para distribuidores -->
+</layout>

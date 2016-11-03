@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MiradorMx_Login>
+            <active>true</active>
+            <codePool>local</codePool>
+        </MiradorMx_Login>
+    </modules>
+    <depends>
+        <Mage_Persistent />
+    </depends>
+</config>
