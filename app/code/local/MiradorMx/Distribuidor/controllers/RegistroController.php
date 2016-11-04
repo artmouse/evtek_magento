@@ -80,6 +80,7 @@ class MiradorMx_Distribuidor_RegistroController extends Mage_Core_Controller_Fro
 				->setCorreo($correo)
 				->setWholesalerName($wholesale_name)
 				->setWholesalerLastname($wholesale_lastname)
+				->setCreatedAt(now())
 				->setMensaje($mensaje);
 			try {
 

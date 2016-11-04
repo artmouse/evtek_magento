@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<MiradorMx_Distribuidor>
-			<version>0.1.0</version>
+			<version>0.1.3</version>
 		</MiradorMx_Distribuidor>
 	</modules>
 	<global>
@@ -110,11 +110,11 @@
                     </manage_empresa>
                     <manage_solicitud translate="title" module="distribuidor">
                         <title>Gestión de Solicitudes</title>
-                        <action>adminhtml/distribuidor_solicitud/</action>
+                        <action>adminhtml/registro_solicitud/</action>
                         <sort_order>1</sort_order>
                     </manage_solicitud>                    
                     <manage_wholesale translate="title" module="distribuidor">
-                        <title>Gestión de distribuidores</title>
+                        <title>Gestión de Distribuidores</title>
                         <action>adminhtml/distribuidor_wholesale/</action>
                         <sort_order>1</sort_order>
                     </manage_wholesale>
