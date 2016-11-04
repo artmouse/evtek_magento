@@ -10,5 +10,5 @@ $installer = $this;
 $installer->startSetup();
 $installer->getConnection()->modifyColumn($this->getTable('distribuidor/solicitud'), 'aceptada', 'varchar(255) NOT NULL default "Nueva"');
 $installer->endSetup();
-
+ 
 ?>
