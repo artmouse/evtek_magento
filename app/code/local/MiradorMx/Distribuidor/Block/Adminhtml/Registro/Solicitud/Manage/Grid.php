@@ -93,13 +93,6 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Registro_Solicitud_Manage_Grid exte
 				'index' => 'correo',
 				'filter_index' => 'correo',
 			));
-		$this->addColumn('observacion',
-			array(
-				'header' => 'Observaciones',
-				'type' => 'text',
-				'index' => 'observacion',
-				'filter_index' => 'observacion',
-			));
 		$this->addColumn('created_at',
 			array(
 				'header' => 'Fecha de la solicitud',
@@ -117,6 +110,25 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Registro_Solicitud_Manage_Grid exte
 	 */
 	public function getGridUrl() {
 		return $this->getUrl('*/*/grid', array('_current' => true));
+	}
+
+	protected function _prepareMassaction() {
+		$this->setMassactionIdField('solicutd_id');
+		$this->getMassactionBlock()->setFormFieldName('solicitud_id');
+		$this->getMassactionBlock()->addItem('aceptar', array(
+			'label' => 'Aceptar solicitud',
+			'url' => $this->getUrl('*/*/massAccept', array('' => '')), // public function massAcceptAction() in SolicitudController.
+			'confirm' => Mage::helper('distribuidor')->__('¿Está seguro de borrar estos elementos?'),
+		));
+
+		return $this;
+
+	}
+	/**
+	 *
+	 */
+	public function getRowUrl($row) {
+		return $this->getUrl('*/*/edit', array('id' => $row->getId()));
 	}
 
 }
