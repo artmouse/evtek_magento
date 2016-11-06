@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<MiradorMx_Distribuidor>
-			<version>0.1.4</version>
+			<version>0.1.5</version>
 		</MiradorMx_Distribuidor>
 	</modules>
 	<global>
@@ -17,6 +17,9 @@
                     <solicitud>
                         <table>distribuidor_solicitud_model</table>
                     </solicitud>
+                    <empresa>
+                        <table>distribuidor_empresa_model</table>
+                    </empresa>                    
                 </entities>
             </distribuidor_resource>
 		</models>
