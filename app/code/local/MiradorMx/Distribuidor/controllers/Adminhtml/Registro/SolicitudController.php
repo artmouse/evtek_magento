@@ -42,23 +42,39 @@ class MiradorMx_Distribuidor_Adminhtml_Registro_SolicitudController extends Mage
 				$solicitudModel = Mage::getModel('distribuidor/solicitud');
 				foreach ($solicitudesids as $solicitudid) {
 					$solicitud = $solicitudModel->load($solicitudid);
-					$solicitud->setData('aceptada', 'Aceptada');
-					$solicitud->save();
-					$empresa = Mage::getModel('distribuidor/empresa');
+					$aceptada = $solicitud->getAceptada();
 					$name = $solicitud->getName();
 					$rfc = $solicitud->getRfc();
-					$wholeName = $solicitud->getWholesalerName();
-					$wholeLast = $solicitud->getWholesalerLastname();
-					$phone = $solicitud->getPhone();
-					$correo = $solicitud->getCorreo();
-					$empresa = Mage::getModel('distribuidor/empresa');
-					$empresa->creaEmpresa($solicitudid, $name, $phone, $correo, $wholeName, $wholeLast, $rfc);
+					if ($aceptada == "Aceptada") {
+						Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__(
+							'La empresa %s ya ha sido aceptada anteriormente', $name));
+					} else {
+						$empresaModel = Mage::getModel('distribuidor/empresa');
+						$flag = $this->existeEmpresa($rfc); /** checamos si ya existe la empresa **/
+						if ($flag == 1) {
+							$solicitud->setData('aceptada', 'Aceptada');
+							$solicitud->save();
+							$wholeName = $solicitud->getWholesalerName();
+							$wholeLast = $solicitud->getWholesalerLastname();
+							$phone = $solicitud->getPhone();
+							$correo = $solicitud->getCorreo();
+							/**creaEmpresa en modelo empresa**/
+							$empresaModel->creaEmpresa($solicitudid, $name, $phone, $correo, $wholeName, $wholeLast, $rfc);
+							Mage::getSingleton('adminhtml/session')->addSuccess(
+								Mage::helper('distribuidor')->__(
+									'Solicitud de la empresa con RFC %s aceptada.', $rfc));
+
+						} else {
+							$solicitud->setData('aceptada', 'Aceptada');
+							$solicitud->save();
+							Mage::getSingleton('adminhtml/session')->addSuccess(
+								Mage::helper('distribuidor')->__(
+									'Solicitud de la empresa con RFC %s aceptada.', $rfc));
+						}
+					}
+
 				}
-				Mage::getSingleton('adminhtml/session')->addSuccess(
-					Mage::helper('distribuidor')->__(
-						'Total de %d solicitud(es) aceptadas.', count($solicitudesids)
-					)
-				);
+
 			} catch (Exception $e) {
 				Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
 			}
@@ -111,7 +127,7 @@ class MiradorMx_Distribuidor_Adminhtml_Registro_SolicitudController extends Mage
 				}
 				Mage::getSingleton('adminhtml/session')->addSuccess(
 					Mage::helper('distribuidor')->__(
-						'Total de %d solicitud(es) en revisión.', count($solicitudesids)
+						'Total de %d solicitud(es) en rechazadas.', count($solicitudesids)
 					)
 				);
 			} catch (Exception $e) {
@@ -170,15 +186,39 @@ class MiradorMx_Distribuidor_Adminhtml_Registro_SolicitudController extends Mage
 			try {
 				//try to save it
 				$model->save();
-				Mage::getSingleton('adminhtml/session')->addSuccess('Saved');
+				Mage::getSingleton('adminhtml/session')->addSuccess('Solicitud guardada correctamente');
 				//redirect to grid.
 				$this->_redirect('*/*/');
 			} catch (Exception $e) {
 				//if there is an error return to edit
-				Mage::getSingleton('adminhtml/session')->addError('Not Saved. Error:' . $e->getMessage());
+				Mage::getSingleton('adminhtml/session')->addError('La solicitud no se ha guardado correctamente. Error:' . $e->getMessage());
 				Mage::getSingleton('adminhtml/session')->setExampleFormData($data);
 				$this->_redirect('*/*/edit', array('id' => $mode->getId(), '_current' => true));
 			}
 		}
 	}
+	/**
+	 * Checamos si ya existe la empresa cuya solicitud se va a aceptar
+	 */
+	public function existeEmpresa($rfc) {
+		$empresaCollection = Mage::getModel('distribuidor/empresa')->getCollection();
+
+		$empresaCollection->addFieldToSelect('rfc')
+			->addFieldToSelect('rfc', $rfc);
+		$empresaCollection->getSelect();
+		$count = $empresaCollection->count();
+		$flag = 0;
+
+		if ($count > 0) {
+
+			Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('
+La empresa con RFC %s tenía una solicitud aceptada con anterioridad, revise sus permisos en la sección de empresas', $rfc));
+
+		} else {
+
+			$flag = 1;
+		}
+		return $flag;
+	}
+
 }

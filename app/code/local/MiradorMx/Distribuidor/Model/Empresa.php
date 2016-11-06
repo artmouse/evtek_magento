@@ -13,6 +13,8 @@ class MiradorMx_Distribuidor_Model_Empresa extends Mage_Core_Model_Abstract {
 	}
 	/**
 	 * Crea una empresa a partir de una solicitud cuando esta última ha sido aceptada
+	 * @param $solicitud id, $name, $phone, $correo, $wholesalerName, $wholesalerLastname
+	 * parámetros vienen de solicitud
 	 */
 	public function creaEmpresa($solicitud, $name, $phone, $correo, $wholesalerName, $wholesalerLastname, $rfc) {
 
@@ -31,6 +33,7 @@ class MiradorMx_Distribuidor_Model_Empresa extends Mage_Core_Model_Abstract {
 					'Se ha creado la empresa %s', $name));
 		} catch (Exception $e) {
 			Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+			Mage::log($e, null, "empresa.log");
 
 		}
 	}
