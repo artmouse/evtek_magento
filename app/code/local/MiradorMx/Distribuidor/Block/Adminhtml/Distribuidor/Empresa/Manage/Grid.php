@@ -33,13 +33,13 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Manage_Grid ex
 	 */
 	protected function _prepareColumns() {
 
-		$this->addColumn('solicitud_id',
+		$this->addColumn('empresa_id',
 			array(
 				'header' => Mage::helper('catalog')->__('ID'),
 				'width' => '50px',
 				'type' => 'number',
-				'index' => 'solicitud_id',
-				'filter_index' => 'main_table.solicitud_id',
+				'index' => 'empresa_id',
+				'filter_index' => 'main_table.empresa_id',
 
 			));
 		$this->addColumn('name',
@@ -65,37 +65,37 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Manage_Grid ex
 				'filter_index' => 'phone',
 
 			));
-		$this->addColumn('aceptada',
+		$this->addColumn('activo',
 			array(
-				'header' => 'Estado de solicitud',
+				'header' => 'Estado de la empresa',
 				'type' => 'text',
-				'index' => 'aceptada',
-				'filter_index' => 'aceptada',
+				'index' => 'activo',
+				'filter_index' => 'activo',
 
 			));
-		$this->addColumn('wholesaler_name',
+		$this->addColumn('admin_name',
 			array(
-				'header' => 'Nombre del solicitante',
+				'header' => 'Nombre del administrador',
 				'type' => 'text',
-				'index' => 'wholesaler_name',
-				'filter_index' => 'wholesaler_name',
+				'index' => 'admin_name',
+				'filter_index' => 'admin_name',
 			));
-		$this->addColumn('wholesaler_lastname',
+		$this->addColumn('admin_lastname',
 			array(
-				'header' => 'Apellido del solicitante',
+				'header' => 'Apellido del administrador',
 				'type' => 'text',
-				'index' => 'wholesaler_lastname',
+				'index' => 'admin_lastname',
 			));
-		$this->addColumn('correo',
+		$this->addColumn('admin_correo',
 			array(
-				'header' => 'Correo del solicitante',
+				'header' => 'Correo del administrador',
 				'type' => 'text',
-				'index' => 'correo',
-				'filter_index' => 'correo',
+				'index' => 'admin_correo',
+				'filter_index' => 'admin_correo',
 			));
 		$this->addColumn('created_at',
 			array(
-				'header' => 'Fecha de la solicitud',
+				'header' => 'Fecha de creación',
 				'format' => Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
 				'type' => 'datetime',
 				'index' => 'created_at',

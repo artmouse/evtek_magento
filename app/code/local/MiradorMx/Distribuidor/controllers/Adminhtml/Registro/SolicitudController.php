@@ -201,14 +201,12 @@ class MiradorMx_Distribuidor_Adminhtml_Registro_SolicitudController extends Mage
 	 * Checamos si ya existe la empresa cuya solicitud se va a aceptar
 	 */
 	public function existeEmpresa($rfc) {
-		$empresaCollection = Mage::getModel('distribuidor/empresa')->getCollection();
+		$empresaCollection = Mage::getModel('distribuidor/empresa')->getCollection()
+			->addFieldToSelect('*')
+			->addFieldToFilter('rfc', $rfc);
 
-		$empresaCollection->addFieldToSelect('rfc')
-			->addFieldToSelect('rfc', $rfc);
-		$empresaCollection->getSelect();
-		$count = $empresaCollection->count();
+		$count = $empresaCollection->getSize();
 		$flag = 0;
-
 		if ($count > 0) {
 
 			Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('
