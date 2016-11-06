@@ -54,26 +54,6 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Registro_Solicitud_Edit_Form extend
 			'class' => 'required-entry',
 			'required' => true,
 			'name' => 'phone'));
-		$fieldset->addField('aceptada', 'select', array(
-			'label' => 'Estado de la solicitud',
-			'values' => array(
-				array(
-					'value' => 'No aceptada',
-					'label' => 'No aceptada',
-				),
-				array(
-					'value' => 'En revision',
-					'label' => 'En revisión',
-				),
-				array(
-					'value' => 'Aceptada',
-					'label' => 'Aceptada',
-				), array(
-					'value' => 'Nueva',
-					'label' => 'Nueva',
-				),
-			),
-			'name' => 'aceptada'));
 		$form->setUseContainer(true);
 		$id = Mage::app()->getRequest()->getParam('id');
 		$model = Mage::getModel('distribuidor/solicitud')->load($id);
