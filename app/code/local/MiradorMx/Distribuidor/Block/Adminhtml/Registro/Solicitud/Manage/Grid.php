@@ -107,25 +107,39 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Registro_Solicitud_Manage_Grid exte
 
 	/**
 	 * Esta función es para que el ajax no recargue la página dos veces dentro del html
+	 * @return string
 	 */
 	public function getGridUrl() {
 		return $this->getUrl('*/*/grid', array('_current' => true));
 	}
 
+	/**
+	 *  prepare el mass action.
+	 */
 	protected function _prepareMassaction() {
 		$this->setMassactionIdField('solicutd_id');
 		$this->getMassactionBlock()->setFormFieldName('solicitud_id');
 		$this->getMassactionBlock()->addItem('aceptar', array(
 			'label' => 'Aceptar solicitud',
 			'url' => $this->getUrl('*/*/massAccept', array('' => '')), // public function massAcceptAction() in SolicitudController.
-			'confirm' => Mage::helper('distribuidor')->__('¿Está seguro de borrar estos elementos?'),
+			'confirm' => Mage::helper('distribuidor')->__('¿Está seguro de aceptar estos elementos?'),
 		));
-
+		$this->getMassactionBlock()->addItem('rechazar', array(
+			'label' => 'Rechazar solicitud',
+			'url' => $this->getUrl('*/*/massRechazo', array('' => '')), // public function massRechazoAction() in SolicitudController.
+			'confirm' => Mage::helper('distribuidor')->__('¿Está seguro de rechazar estas solicitudes?'),
+		));
+		$this->getMassactionBlock()->addItem('revision', array(
+			'label' => 'En revisión',
+			'url' => $this->getUrl('*/*/massRevision', array('' => '')), // public function massRechazoAction() in SolicitudController.
+			'confirm' => Mage::helper('distribuidor')->__('¿Está seguro de poner en revisión estas solicitudes?'),
+		));
 		return $this;
 
 	}
 	/**
-	 *
+	 * Url para edit de solicitud
+	 * @return string
 	 */
 	public function getRowUrl($row) {
 		return $this->getUrl('*/*/edit', array('id' => $row->getId()));
