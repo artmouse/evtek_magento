@@ -108,7 +108,7 @@
                 <children>
                     <manage_empresa translate="title" module="distribuidor">
                         <title>Gestión de Empresas</title>
-                        <action>adminhtml/distribuidor_empresa/</action>
+                        <action>adminhtml/distribuidor_empresa_empresa/</action>
                         <sort_order>1</sort_order>
                     </manage_empresa>
                     <manage_solicitud translate="title" module="distribuidor">
