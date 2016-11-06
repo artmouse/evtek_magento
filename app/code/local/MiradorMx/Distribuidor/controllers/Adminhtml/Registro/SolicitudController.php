@@ -29,45 +29,34 @@ class MiradorMx_Distribuidor_Adminhtml_Registro_SolicitudController extends Mage
 		$this->getResponse()->setBody($this->getLayout()->createBlock('distribuidor/adminhtml_registro_solicitud_manage_grid')->toHtml());
 	}
 
-	public function massDeleteAction() {
-		$solicitudesids = $this->getRequest()->getParam('id'); // $this->getMassactionBlock()->setFormFieldName('tax_id'); from Mage_Adminhtml_Block_Empresa_Manage_Grid
-		if (!is_array($solicitudesids)) {
-			Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('Por favor seleccione empresas'));
-		} else {
-			try {
-				$solicitudModel = Mage::getModel('distribuidor/solicitud');
-				foreach ($solicitudesids as $solicitudid) {
-					$solicitudModel->load($solicitudid)->delete();
-				}
-				Mage::getSingleton('adminhtml/session')->addSuccess(
-					Mage::helper('distribuidor')->__(
-						'Total de %d empresas borrada.', count($solicitudesids)
-					)
-				);
-			} catch (Exception $e) {
-				Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-			}
-		}
-		$this->_redirect('*/*/index');
-
-	}
 	/**
 	 * Mass Accept Action
 	 * Acepta solicitudes de forma masiva en el grid de solicitudes.
 	 */
 	public function massAcceptAction() {
-		$solicitudesids = $this->getRequest()->getParam('id');
+		$solicitudesids = $this->getRequest()->getParam('solicitud_id');
 		if (!is_array($solicitudesids)) {
-			Mage::getSingleton('adminhtml/session')->addError(Mage::helper('proveedores')->__('Por favor seleccione solicitudes'));
+			Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('Por favor seleccione solicitudes'));
 		} else {
 			try {
 				$solicitudModel = Mage::getModel('distribuidor/solicitud');
-				foreach ($solicitudesids as $solictdid) {
-					$solicitudModel->load($solicitudid)->setAceptada('Aceptada')->save();
+				foreach ($solicitudesids as $solicitudid) {
+					$solicitud = $solicitudModel->load($solicitudid);
+					$solicitud->setData('aceptada', 'Aceptada');
+					$solicitud->save();
+					$empresa = Mage::getModel('distribuidor/empresa');
+					$name = $solicitud->getName();
+					$rfc = $solicitud->getRfc();
+					$wholeName = $solicitud->getWholesalerName();
+					$wholeLast = $solicitud->getWholesalerLastname();
+					$phone = $solicitud->getPhone();
+					$correo = $solicitud->getCorreo();
+					$empresa = Mage::getModel('distribuidor/empresa');
+					$empresa->creaEmpresa($solicitudid, $name, $phone, $correo, $wholeName, $wholeLast, $rfc);
 				}
 				Mage::getSingleton('adminhtml/session')->addSuccess(
 					Mage::helper('distribuidor')->__(
-						'Total de %d solicitudes aceptadas.', count($solicitudesids)
+						'Total de %d solicitud(es) aceptadas.', count($solicitudesids)
 					)
 				);
 			} catch (Exception $e) {
@@ -76,6 +65,62 @@ class MiradorMx_Distribuidor_Adminhtml_Registro_SolicitudController extends Mage
 		}
 		$this->_redirect('*/*/index');
 	}
+	/**
+	 * Mass Revisión Action
+	 * Pone en revisión solicitudes de forma masiva en el grid de solicitudes.
+	 */
+	public function massRevisionAction() {
+		$solicitudesids = $this->getRequest()->getParam('solicitud_id');
+		if (!is_array($solicitudesids)) {
+			Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('Por favor seleccione solicitudes'));
+		} else {
+			try {
+				$solicitudModel = Mage::getModel('distribuidor/solicitud');
+				foreach ($solicitudesids as $solicitudid) {
+					$solicitud = $solicitudModel->load($solicitudid);
+					$solicitud->setData('aceptada', 'En revision');
+					$solicitud->save();
+
+				}
+				Mage::getSingleton('adminhtml/session')->addSuccess(
+					Mage::helper('distribuidor')->__(
+						'Total de %d solicitud(es) en revisión.', count($solicitudesids)
+					)
+				);
+			} catch (Exception $e) {
+				Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+			}
+		}
+		$this->_redirect('*/*/index');
+	}
+	/**
+	 * Mass Rechazo Action
+	 * Rechaza solicitudes de forma masiva en el grid de solicitudes.
+	 */
+	public function massRechazoAction() {
+		$solicitudesids = $this->getRequest()->getParam('solicitud_id');
+		if (!is_array($solicitudesids)) {
+			Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('Por favor seleccione solicitudes'));
+		} else {
+			try {
+				$solicitudModel = Mage::getModel('distribuidor/solicitud');
+				foreach ($solicitudesids as $solicitudid) {
+					$solicitud = $solicitudModel->load($solicitudid);
+					$solicitud->setData('aceptada', 'No aceptada');
+					$solicitud->save();
+				}
+				Mage::getSingleton('adminhtml/session')->addSuccess(
+					Mage::helper('distribuidor')->__(
+						'Total de %d solicitud(es) en revisión.', count($solicitudesids)
+					)
+				);
+			} catch (Exception $e) {
+				Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+			}
+		}
+		$this->_redirect('*/*/index');
+	}
+
 	/**
 	 * Edit action para solicitudes.
 	 */
