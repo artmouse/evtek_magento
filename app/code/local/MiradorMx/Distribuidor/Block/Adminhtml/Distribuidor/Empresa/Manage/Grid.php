@@ -112,4 +112,12 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Manage_Grid ex
 	public function getGridUrl() {
 		return $this->getUrl('*/*/grid', array('_current' => true));
 	}
+
+	/**
+	 * Url para edit de solicitud
+	 * @return string
+	 */
+	public function getRowUrl($row) {
+		return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+	}
 }
