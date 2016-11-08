@@ -18,8 +18,11 @@
                         <table>distribuidor_solicitud_model</table>
                     </solicitud>
                     <empresa>
-                        <table>distribuidor_empresa_model</table>
-                    </empresa>                    
+                        <table>distribuidor_direccion_model</table>
+                    </empresa>   
+                    <direccion>
+                        <table>distribuidor_direccion_model</table>
+                    </direccion>                                     
                 </entities>
             </distribuidor_resource>
 		</models>

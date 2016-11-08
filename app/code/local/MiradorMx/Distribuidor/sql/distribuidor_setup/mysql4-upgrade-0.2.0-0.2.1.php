@@ -34,7 +34,6 @@ $table = $installer->getConnection()->newTable($installer->getTable('distribuido
 	), 'estado de la empresa')
 	->addColumn('pais', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
 		'nullable' => false,
-		'default' => 'Mexico',
 	), 'pais de la empresa')
 	->addColumn('codigo_postal', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
 		'nullable' => false,
