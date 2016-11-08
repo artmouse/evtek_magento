@@ -27,9 +27,8 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 	}
 
 	/**
-	 * Edit action para solicitudes.
+	 * Edit action para empresas.
 	 */
-
 	public function editAction() {
 
 		$id = $this->getRequest()->getParam('id', null);
@@ -53,6 +52,16 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 		$this->loadLayout();
 		$this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 
+		$this->_addContent($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit'))
+			->_addLeft($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit_tabs'));
+		$this->renderLayout();
+	}
+
+	/**
+	 * New Action para empresas
+	 */
+	public function newAction() {
+		$this->loadLayout();
 		$this->_addContent($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit'))
 			->_addLeft($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit_tabs'));
 		$this->renderLayout();

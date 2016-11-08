@@ -11,9 +11,6 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Manage extends
 		$this->_controller = 'adminhtml_distribuidor_empresa_manage';
 		$this->_headerText = Mage::helper('distribuidor')->__('Gestión de Empresas');
 		parent::__construct();
-		//para quitar el botón y quitamos el return:
-		$this->_removeButton('add');
-		//return parent::__construct();
 
 	}
 	/**

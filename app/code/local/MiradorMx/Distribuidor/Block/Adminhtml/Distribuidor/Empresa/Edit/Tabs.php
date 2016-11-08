@@ -24,6 +24,11 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit_Tabs exte
 			'title' => Mage::helper('distribuidor')->__('Información de contacto'),
 			'content' => $this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit_tab_contacto')->toHtml(),
 		));
+		$this->addTab('form_section2', array(
+			'label' => Mage::helper('distribuidor')->__('Direcciones'),
+			'title' => Mage::helper('distribuidor')->__('Direcciones'),
+			'content' => $this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit_tab_direcciones')->toHtml(),
+		));
 
 		return parent::_beforeToHtml();
 	}
