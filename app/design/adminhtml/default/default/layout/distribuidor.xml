@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout>
+<!--Grid para direcciones en el tab de editar empresa-->
+<adminhtml_distribuidor_empresa_empresa_direcciones>
+       <block type="core/text_list" name="root" output="toHtml">
+           <block type="distribuidor/adminhtml_distribuidor_empresa_edit_tab_grid" name="direcciones.grid"/>
+           <block type="adminhtml/widget_grid_serializer" name="grid_serializer">
+               <reference name="grid_serializer">
+                   <action method="initSerializerBlock">
+                       <grid_block_name>direcciones.grid</grid_block_name>
+                       <hidden_input_name>direcciones</hidden_input_name>
+                       <reload_param_name>direcciones</reload_param_name>
+                   </action>
+                   <action method="addColumnInputName">
+                       <input_name>direccion_id</input_name>
+                   </action>                  
+               </reference>
+           </block>
+       </block>
+   </adminhtml_distribuidor_empresa_empresa_direcciones>
+   <adminhtml_distribuidor_empresa_empresa_direccionesgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="distribuidor/adminhtml_distribuidor_empresa_edit_tab_grid" name="direcciones.grid"/>
+        </block>
+</adminhtml_distribuidor_empresa_empresa_direccionesgrid>
+<!--Grid para direcciones en el tab de editar empresa-->
+</layout>

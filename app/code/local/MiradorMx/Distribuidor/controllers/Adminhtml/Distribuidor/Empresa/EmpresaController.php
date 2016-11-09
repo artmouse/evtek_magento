@@ -1,6 +1,9 @@
 <?php
 /**
- *
+ * MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController
+ * @category MiradadorMx
+ * @package  MiradorMx_Distribuidor
+ * @author   Mariana Valdivia
  */
 class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController extends Mage_Adminhtml_Controller_Action {
 
@@ -61,6 +64,31 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 	 * New Action para empresas
 	 */
 	public function newAction() {
+		$this->loadLayout();
+		$this->_addContent($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit'))
+			->_addLeft($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit_tabs'));
+		$this->renderLayout();
+	}
+	/**
+	 * Tab action de direcciones
+	 */
+	public function direccionesAction() {
+		$this->loadLayout();
+		$this->getLayout()->getBlock('direcciones.grid');
+		$this->renderLayout();
+	}
+	/**
+	 * Grid action de direcciones
+	 */
+	public function direccionesGridAction() {
+		$this->loadLayout();
+		$this->getLayout()->getBlock('direcciones.grid');
+		$this->renderLayout();
+	}
+	/**
+	 * Action para agregar direcciones
+	 */
+	public function agregarDireccionAction() {
 		$this->loadLayout();
 		$this->_addContent($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit'))
 			->_addLeft($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit_tabs'));

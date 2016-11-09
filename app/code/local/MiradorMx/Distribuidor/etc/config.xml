@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<MiradorMx_Distribuidor>
-			<version>0.2.1</version>
+			<version>0.2.4</version>
 		</MiradorMx_Distribuidor>
 	</modules>
 	<global>
@@ -18,7 +18,7 @@
                         <table>distribuidor_solicitud_model</table>
                     </solicitud>
                     <empresa>
-                        <table>distribuidor_direccion_model</table>
+                        <table>distribuidor_empresa_model</table>
                     </empresa>   
                     <direccion>
                         <table>distribuidor_direccion_model</table>
@@ -128,4 +128,13 @@
             </distribuidor_options>
         </menu>
     </adminhtml>
+    <adminhtml>
+    <layout>
+        <updates>
+            <distribuidor>
+                <file>distribuidor.xml</file>
+            </distribuidor>
+        </updates>
+    </layout>
+</adminhtml>
 </config>

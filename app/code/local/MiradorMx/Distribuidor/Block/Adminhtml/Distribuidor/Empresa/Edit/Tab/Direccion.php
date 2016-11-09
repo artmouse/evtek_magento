@@ -1,5 +1,5 @@
 <?php
-class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit_Tab_Direcciones extends Mage_Adminhtml_Block_Widget_Form {
+class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit_Tab_Direccion extends Mage_Adminhtml_Block_Widget_Form {
 
 	protected function _prepareForm() {
 
@@ -11,7 +11,7 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit_Tab_Direc
 
 		$form = new Varien_Data_Form();
 		$this->setForm($form);
-		$fieldset = $form->addFieldset('empresa_empresa', array('legend' => Mage::helper('distribuidor')->__('Direcciones de la empresa')));
+		$fieldset = $form->addFieldset('empresa_empresa', array('legend' => Mage::helper('distribuidor')->__('Dirección principal de la empresa')));
 		$fieldset->addField('calle_avenida', 'text', array(
 			'name' => 'calle_avenida',
 			'label' => Mage::helper('distribuidor')->__('Calle/avenida'),

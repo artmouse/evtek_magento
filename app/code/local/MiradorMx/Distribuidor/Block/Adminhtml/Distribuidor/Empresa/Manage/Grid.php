@@ -10,8 +10,8 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Manage_Grid ex
 	 */
 	function __construct() {
 		parent::__construct();
-		$this->setId('empresa_id');
-		$this->setDefaultSort('empresa_id');
+		$this->setId('id');
+		$this->setDefaultSort('id');
 		$this->setDefaultDir('DESC');
 		$this->setSaveParametersInSession(true);
 		$this->setUseAjax(true);
