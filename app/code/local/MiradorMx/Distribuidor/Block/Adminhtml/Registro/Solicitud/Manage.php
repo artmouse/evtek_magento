@@ -3,8 +3,9 @@
  *
  */
 class MiradorMx_Distribuidor_Block_Adminhtml_Registro_Solicitud_Manage extends Mage_Adminhtml_Block_Widget_Grid_Container {
+
 	/**
-	 *
+	 * Construct grid container.
 	 */
 	function __construct() {
 		$this->_blockGroup = 'distribuidor';
@@ -15,13 +16,6 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Registro_Solicitud_Manage extends M
 		$this->_removeButton('add');
 		//return parent::__construct();
 
-	}
-	/**
-	 *
-	 */
-	public function gridAction() {
-		$this->loadLayout();
-		$this->getResponse()->setBody($this->getLayout()->createBlock('distribuidor/adminhtml_registro_solicitud_manage_grid')->toHtml());
 	}
 
 }
