@@ -13,6 +13,7 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Direccion_Edit
 	 * Form para edit de Direccion en el admin.
 	 */
 	function _prepareForm() {
+		$id = $this->getRequest()->getParam('id_empresa');
 		$form = new Varien_Data_Form(array(
 			'id' => 'edit_form',
 			'action' => $this->getUrl('*/*/savedireccion', array('id_empresa' => $this->getRequest()->getParam('id_empresa'))),
@@ -54,13 +55,17 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Direccion_Edit
 			'required' => true,
 			'name' => 'pais',
 		));
+		$fieldset->addField('codigo_postal', 'text', array(
+			'label' => Mage::helper('distribuidor')->__('Código postal'),
+			'name' => 'codigo_postal',
+			'required' => true,
+			'class' => 'required-entry',
+		));
 		$fieldset->addField('estado', 'select', array(
 			'label' => Mage::helper('distribuidor')->__('Estado'),
 			'class' => 'required-entry',
 			'required' => true,
-			'name' => 'title',
-			'onclick' => "",
-			'onchange' => "",
+			'name' => 'estado',
 			'value' => '1',
 			'values' => array(
 				'-1' => 'Por favor seleccione un estado',
@@ -96,10 +101,25 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Direccion_Edit
 				"Veracruz" => "Veracruz",
 				"Yucatán" => "Yucatán",
 				"Zacatecas" => "Zacatecas"),
-			'disabled' => false,
-			'readonly' => false,
-			'tabindex' => 1,
 		));
+		$fieldset->addField('empresa', 'text', array(
+			'label' => Mage::helper('distribuidor')->__('Id de la empresa'),
+			'name' => 'empresa',
+			'value' => $id,
+			'readonly' => true,
+		));
+		$fieldset->addField('tipo', 'select', array(
+			'label' => Mage::helper('distribuidor')->__('Tipo de dirección'),
+			'name' => 'tipo',
+			'value' => '1',
+			'values' => array(
+				'Ninguna' => 'Por favor seleccione un tipo de dirección',
+				"Ninguna" => "Ninguna",
+				"Facturación" => "Facturacion",
+				"Envío" => "Envio",
+				"Facturacion/envio" => "Facturacion/envio",
+			))
+		);
 		$form->setUseContainer(true);
 		$this->setForm($form);
 		//$id_empresa = Mage::app()->getRequest()->getParam('id_empresa');

@@ -93,4 +93,58 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 		$this->renderLayout();
 	}
 
+	/**
+	 * Save action para empresa
+	 */
+	public function saveAction() {
+		if ($data = $this->getRequest()->getPost()) {
+			//init model and set data
+			$model = Mage::getModel('distribuidor/empresa');
+			if ($id = $this->getRequest()->getParam('id')) {
+				//the parameter name may be different
+				$model->load($id);
+			}
+			$model->addData($data);
+			try {
+				//try to save it
+				$model->save();
+				Mage::getSingleton('adminhtml/session')->addSuccess('Empresa guardada correctamente');
+				//redirect to grid.
+				$this->_redirect('*/*/');
+			} catch (Exception $e) {
+				//if there is an error return to edit
+				Mage::getSingleton('adminhtml/session')->addError('La empresa no se ha guardado correctamente. Error:' . $e->getMessage());
+				Mage::getSingleton('adminhtml/session')->setExampleFormData($data);
+				$this->_redirect('*/*/edit', array('id' => $mode->getId(), '_current' => true));
+			}
+		}
+	}
+
+	/**
+	 * Save action para direcciones
+	 */
+	public function saveDireccionAction() {
+		if ($data = $this->getRequest()->getPost()) {
+			//init model and set data
+			$model = Mage::getModel('distribuidor/direccion');
+			if ($id = $this->getRequest()->getParam('id')) {
+				//the parameter name may be different
+				$model->load($id);
+			}
+			$model->addData($data);
+			try {
+				//try to save it
+				$model->save();
+				Mage::getSingleton('adminhtml/session')->addSuccess('Dirección guardada correctamente');
+				//redirect to grid.
+				$this->_redirect('*/*/');
+			} catch (Exception $e) {
+				//if there is an error return to edit
+				Mage::getSingleton('adminhtml/session')->addError('La dirección no se ha guardado correctamente. Error:' . $e->getMessage());
+				Mage::getSingleton('adminhtml/session')->setExampleFormData($data);
+				$this->_redirect('*/*/agregarDireccion', array('id' => $mode->getId(), '_current' => true));
+			}
+		}
+	}
+
 }
