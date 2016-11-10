@@ -46,9 +46,10 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit extends M
             }
         ";
 	}
-/*
- * This function is responsible for Including TincyMCE in Head.
- */
+
+	/**
+	 * This function is responsible for Including TincyMCE in Head.
+	 */
 	protected function _prepareLayout() {
 		parent::_prepareLayout();
 		if (Mage::getSingleton('cms/wysiwyg_config')->isEnabled()) {
@@ -56,7 +57,9 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit extends M
 			$this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 		}
 	}
-
+	/**
+	 * Header text
+	 */
 	public function getHeaderText() {
 		if (Mage::registry('distribuidor_empresa') && Mage::registry('distribuidor_empresa')->getId()) {
 			return Mage::helper('distribuidor')->__('Editar Empresa', $this->htmlEscape(Mage::registry('distribuidor_empresa')->getTitle()));
@@ -64,7 +67,9 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit extends M
 			return Mage::helper('distribuidor')->__('Nueva Empresa');
 		}
 	}
-
+	/**
+	 * Obtenemos el id de la url.
+	 */
 	public function getId() {
 		$id = $this->getRequest()->getParam('id');
 
