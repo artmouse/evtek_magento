@@ -89,7 +89,7 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 	public function agregarDireccionAction() {
 		$id = $this->getRequest()->getParam('id_empresa', null);
 		$this->loadLayout();
-		$this->_addContent($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_direccion'));
+		$this->_addContent($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_direccion_edit'));
 		$this->renderLayout();
 	}
 

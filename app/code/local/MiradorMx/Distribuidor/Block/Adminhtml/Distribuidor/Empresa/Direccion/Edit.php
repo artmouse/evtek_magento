@@ -1,19 +1,19 @@
 	<?php
 
 /**
- * Class MiradorMx_Distribuidor_Block_Adminhtml_Empresa_Direccion
+ * Class MiradorMx_Distribuidor_Block_Adminhtml_Empresa_Direccion_Edit
  * Form container para agregar direcciones
  * @category MiradadorMx
  * @package  MiradorMx_Distribuidor
  * @author   Mariana Valdivia
  */
-class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Direccion extends Mage_Adminhtml_Block_Widget_Form_Container {
+class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Direccion_Edit extends Mage_Adminhtml_Block_Widget_Form_Container {
 	/**
 	 *
 	 */
 	function _construct() {
 		$this->_blockGroup = 'distribuidor';
-		$this->_controller = 'adminhtml_empresa_direccion';
+		$this->_controller = 'adminhtml_distribuidor_empresa_direccion';
 
 		parent::_construct();
 	}
