@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * Class MiradorMx_Distribuidor_Adminhtml_Registro_SolicitudController
  * @category MiradorMx
  * @package  MiradorMx_Distribuidor
  * @author   Mariana Valdivia

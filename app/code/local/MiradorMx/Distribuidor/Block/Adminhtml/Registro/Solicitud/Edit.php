@@ -2,6 +2,9 @@
 
 /**
  * Class MiradorMx_Distribuidor_Block_Adminhtml_Registro_Solicitud_Edit
+ * @category MiradadorMx
+ * @package  MiradorMx_Distribuidor
+ * @author   Mariana Valdivia
  */
 class MiradorMx_Distribuidor_Block_Adminhtml_Registro_Solicitud_Edit extends Mage_Adminhtml_Block_Widget_Form_Container {
 	/**

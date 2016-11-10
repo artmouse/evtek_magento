@@ -1,16 +1,18 @@
 <?php
 
 /**
- * MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit
+ * Class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit
  * @category MiradadorMx
  * @package  MiradorMx_Distribuidor
  * @author   Mariana Valdivia
  */
 class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit extends Mage_Adminhtml_Block_Widget_Form_Container {
+
 	/**
-	 *
+	 * Blotes del container grid del form de edit de empresa
 	 */
 	public function __construct() {
+		$id = $this->getRequest()->getParam('id');
 		parent::__construct();
 		$this->_objectId = 'id';
 		$this->_blockGroup = 'distribuidor';
@@ -23,10 +25,10 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit extends M
 			'onclick' => 'saveAndContinueEdit()',
 			'class' => 'save',
 		), -100);
-		/**Lleva'al controller de agregar más direcciones a parte**/
+		/**Lleva al form de agregar más direcciones a parte y agarra el id de empresa del la url**/
 		$this->_addButton('agregar_direccion', array(
 			'label' => 'Agregar Dirección',
-			'onclick' => 'setLocation(\'' . $this->getUrl('*/*/agregarDireccion') . '\')',
+			'onclick' => 'setLocation(\'' . $this->getUrl('*/*/agregarDireccion', array('id_empresa' => $id)) . '\')',
 			'class' => 'save',
 		), 100);
 
@@ -61,6 +63,11 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit extends M
 		} else {
 			return Mage::helper('distribuidor')->__('Nueva Empresa');
 		}
+	}
+
+	public function getId() {
+		$id = $this->getRequest()->getParam('id');
+
 	}
 
 }

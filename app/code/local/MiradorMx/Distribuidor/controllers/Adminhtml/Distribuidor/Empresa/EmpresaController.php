@@ -33,9 +33,7 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 	 * Edit action para empresas.
 	 */
 	public function editAction() {
-
 		$id = $this->getRequest()->getParam('id', null);
-
 		$model = Mage::getModel('distribuidor/empresa');
 		if ($id) {
 			$model->load((int) $id);
@@ -89,9 +87,9 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 	 * Action para agregar direcciones
 	 */
 	public function agregarDireccionAction() {
+		$id = $this->getRequest()->getParam('id_empresa', null);
 		$this->loadLayout();
-		$this->_addContent($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit'))
-			->_addLeft($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit_tabs'));
+		$this->_addContent($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_direccion'));
 		$this->renderLayout();
 	}
 
