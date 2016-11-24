@@ -13,10 +13,16 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Direccion_Edit
 	 * Form para edit de Direccion en el admin.
 	 */
 	function _prepareForm() {
+
+		if (Mage::registry('distribuidor_direccion')) {
+			$data = Mage::registry('distribuidor_direccion')->getData();
+		} else {
+			$data = array();
+		}
 		$id = $this->getRequest()->getParam('id_empresa');
 		$form = new Varien_Data_Form(array(
 			'id' => 'edit_form',
-			'action' => $this->getUrl('*/*/savedireccion', array('id_empresa' => $this->getRequest()->getParam('id_empresa'))),
+			'action' => $this->getUrl('*/*/saveDireccion', array('id' => $this->getRequest()->getParam('id'))),
 			'method' => 'post',
 		));
 		$this->setForm($form);
@@ -121,7 +127,8 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Direccion_Edit
 			))
 		);
 		$form->setUseContainer(true);
-		$this->setForm($form);
+		$form->setValues($data);
+		//$this->setForm($form);
 		//$id_empresa = Mage::app()->getRequest()->getParam('id_empresa');
 		//$model = Mage::getModel('distribuidor/direccion')->load($id);
 		//$form->setValues($model->getData());

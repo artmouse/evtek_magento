@@ -173,4 +173,32 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 		}
 	}
 
+	/**
+	 * Activa una empresa
+	 */
+	public function activateEmpresaAction() {
+
+	}
+
+	/**
+	 * Desactiva una empresa
+	 */
+	public function deactivateEmpresaAction() {
+
+	}
+
+	/**
+	 * Mass action para activar empresas
+	 */
+	public function massActivateEmpresaAction() {
+
+	}
+
+	/**
+	 * Mass action para desactivar empresas
+	 */
+	public function massDeactivateEmpresaAction() {
+
+	}
+
 }

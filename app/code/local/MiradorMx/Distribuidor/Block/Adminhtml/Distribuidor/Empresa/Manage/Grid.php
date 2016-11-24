@@ -120,4 +120,52 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Manage_Grid ex
 	public function getRowUrl($row) {
 		return $this->getUrl('*/*/edit', array('id' => $row->getId()));
 	}
+
+	/**
+	 *  prepare el mass action.
+	 */
+	protected function _prepareMassaction() {
+		$this->setMassactionIdField('empresa_id');
+		$this->getMassactionBlock()->setFormFieldName('empresa_id');
+		$activa = $this->getEstado();
+		if ($activa) {
+			// la empresa está activada
+			$this->getMassactionBlock()->addItem('desactivar', array(
+				'label' => 'Desactivar empresa',
+				'url' => $this->getUrl('*/*/massDeactivateEmpresa', array('' => '')), // public function massRechazoAction() in SolicitudController.
+				'confirm' => Mage::helper('distribuidor')->__('¿Está seguro de desactivar estas empresas? Al hacerlo se desactivarán todas las cuentas asociadas a éstas'),
+			));
+		} else {
+			//la emrpesa no está activada.
+			$this->getMassactionBlock()->addItem('activar', array(
+				'label' => 'Activar emrpesa',
+				'url' => $this->getUrl('*/*/massActivateEmpresa', array('' => '')), // public function massAcceptAction() in SolicitudController.
+				'confirm' => Mage::helper('distribuidor')->__('¿Está seguro de activar estas empresas? Al hacerlo se activarán todas las cuentás asocidas a éstas'),
+			));
+		}
+		return $this;
+	}
+	/**
+	 * Regresa un bool cuyo valor depende del estado de la empresa
+	 */
+	public function getEstado() {
+		$flag = false;
+		$id = $this->getRequest()->getParam('id', null);
+		$model = Mage::getModel('distribuidor/empresa');
+		if ($id) {
+			$model->load((int) $id);
+			if ($model->getId()) {
+				$estado = $model->getActivo();
+				if ($estado == "No activa") {
+					$flag = false;
+				} elseif ($estado == "Activa") {
+					$flag == true;
+				}
+			} else {
+				Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('Esta empresa no existe'));
+				$this->_redirect('*/*/');
+			}
+		}
+		return $flag;
+	}
 }

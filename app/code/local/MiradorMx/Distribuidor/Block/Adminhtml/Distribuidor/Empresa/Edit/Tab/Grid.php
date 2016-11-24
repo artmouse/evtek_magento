@@ -136,4 +136,5 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit_Tab_Grid 
 			'id' => $row->getId())
 		);
 	}
+
 }

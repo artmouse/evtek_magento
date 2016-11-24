@@ -48,6 +48,20 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit_Tabs exte
 			'url' => $this->getUrl('*/*/direcciones', array('_current' => true)),
 			'class' => 'ajax',
 		));
+		/**Grid de usuarios de la empresa**/
+		$this->addTab('form_section4', array(
+			'label' => Mage::helper('distribuidor')->__('Usuarios de la empresa'),
+			'title' => Mage::helper('distribuidor')->__('Usuarios de la empresa'),
+			'url' => $this->getUrl('*/*/users', array('_current' => true)),
+			'class' => 'ajax',
+		));
+		/**Grid de pedidos de la empresa**/
+		$this->addTab('form_section5', array(
+			'label' => Mage::helper('distribuidor')->__('Pedidos de la empresa'),
+			'title' => Mage::helper('distribuidor')->__('Pedidos de la empresa'),
+			'url' => $this->getUrl('*/*/orders', array('_current' => true)),
+			'class' => 'ajax',
+		));
 
 		return parent::_beforeToHtml();
 	}

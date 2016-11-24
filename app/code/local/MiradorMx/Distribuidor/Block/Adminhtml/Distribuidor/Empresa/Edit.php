@@ -19,7 +19,7 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit extends M
 		$this->_controller = 'adminhtml_distribuidor_empresa';
 		$this->_mode = 'edit';
 		$this->_updateButton('save', 'label', Mage::helper('distribuidor')->__('Guardar empresa'));
-		$this->_updateButton('delete', 'label', Mage::helper('distribuidor')->__('Borrar'));
+		$this->_removeButton('delete');
 		$this->_addButton('saveandcontinue', array(
 			'label' => Mage::helper('distribuidor')->__('Guardar y continuar editando'),
 			'onclick' => 'saveAndContinueEdit()',
@@ -31,6 +31,23 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit extends M
 			'onclick' => 'setLocation(\'' . $this->getUrl('*/*/agregarDireccion', array('id_empresa' => $id)) . '\')',
 			'class' => 'save',
 		), 100);
+		/**lleva al action de activar y desactivar una empresa**/
+		$activa = $this->getEstado();
+		if ($activa) {
+			// está activa, se puede desactivar.
+			$this->_addButton('desactiva_empresa', array(
+				'label' => 'Desactivar empresa',
+				'onclick' => 'setLocation(\'' . $this->getUrl('*/*/deactivateEmpresa', array('id_empresa' => $id)) . '\')',
+				'class' => 'delete',
+			), 100);
+		} else {
+			// No está activa, se puede activar.
+			$this->_addButton('activar_empresa', array(
+				'label' => 'Activar empresa',
+				'onclick' => 'setLocation(\'' . $this->getUrl('*/*/activateEmpresa', array('id_empresa' => $id)) . '\')',
+				'class' => 'save',
+			), 100);
+		}
 
 		$this->_formScripts[] = "
             function toggleEditor() {
@@ -73,6 +90,29 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit extends M
 	public function getId() {
 		$id = $this->getRequest()->getParam('id');
 
+	}
+	/**
+	 * Regresa un bool cuyo valor depende de si está activada o desactivada la empresa.
+	 */
+	public function getEstado() {
+		$flag = false;
+		$id = $this->getRequest()->getParam('id', null);
+		$model = Mage::getModel('distribuidor/empresa');
+		if ($id) {
+			$model->load((int) $id);
+			if ($model->getId()) {
+				$estado = $model->getActivo();
+				if ($estado == "No activa") {
+					$flag = false;
+				} elseif ($estado == "Activa") {
+					$flag == true;
+				}
+			} else {
+				Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('Esta empresa no existe'));
+				$this->_redirect('*/*/');
+			}
+		}
+		return $flag;
 	}
 
 }
