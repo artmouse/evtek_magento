@@ -24,8 +24,10 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit_Tab_Grid 
 	 *
 	 */
 	protected function _prepareCollection() {
+		$id = $this->getRequest()->getParam('id');
 		$collection = Mage::getModel('distribuidor/direccion')->getCollection();
-		//$collection->getSelect()->group('main_table.direccion_id');
+		$collection->addFieldToSelect('*')
+			->addFieldToFilter('empresa', $id);
 		$this->setCollection($collection);
 
 		return Mage_Adminhtml_Block_Widget_Grid::_prepareCollection();
@@ -128,4 +130,10 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit_Tab_Grid 
 		//esta pinche funcion no hace ni madres. Pero si la quito no funciona.
 	}
 
+	public function getRowUrl($row) {
+		return $this->getUrl('*/*/editDireccion', array(
+			'empresa_id' => $this->getRequest()->getParam('id'),
+			'id' => $row->getId())
+		);
+	}
 }

@@ -57,6 +57,31 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 			->_addLeft($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_edit_tabs'));
 		$this->renderLayout();
 	}
+	/**
+	 * Edit action para direcciones de empresa
+	 */
+	public function editDireccionAction() {
+		$id = $this->getRequest()->getParam('id', null); //tomamos el id de la dirección
+		$model = Mage::getModel('distribuidor/direccion');
+		if ($id) {
+			$model->load((int) $id);
+			if ($model->getId()) {
+				$data = MAge::getSingleton('adminhtml/session')->getFormData(true);
+				if ($data) {
+					$model->setData($data)->setId($id);
+				}
+			} else {
+				Mage::getSingleton('adminhtml/session')->addrror(Mage::helper('distribuidor')->__('Esta dirección no existe'));
+				$this->_redirect('*/*/');
+			}
+		}
+		Mage::register('distribuidor_direccion', $model);
+		$this->_title($this->__('Dirección'))->_title($this->__('Editar dirección'));
+		$this->loadLayout();
+		$this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
+		$this->_addContent($this->getLayout()->createBlock('distribuidor/adminhtml_distribuidor_empresa_direccion_edit'));
+		$this->renderLayout();
+	}
 
 	/**
 	 * New Action para empresas
@@ -101,6 +126,7 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 			//init model and set data
 			$model = Mage::getModel('distribuidor/empresa');
 			if ($id = $this->getRequest()->getParam('id')) {
+
 				//the parameter name may be different
 				$model->load($id);
 			}

@@ -9,7 +9,7 @@
 class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit_Form extends Mage_Adminhtml_Block_Widget_Form {
 
 	/**
-	 *
+	 * Preparamos multiform en tabs
 	 */
 	protected function _prepareForm() {
 		if (Mage::registry('distribuidor_empresa')) {
@@ -19,7 +19,7 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit_Form exte
 		}
 		$form = new Varien_Data_Form(array(
 			'id' => 'edit_form',
-			'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('empresa_id'))),
+			'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'))),
 			'method' => 'post',
 			'enctype' => 'multipart/form-data',
 		)
