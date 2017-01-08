@@ -177,28 +177,98 @@ class MiradorMx_Distribuidor_Adminhtml_Distribuidor_Empresa_EmpresaController ex
 	 * Activa una empresa
 	 */
 	public function activateEmpresaAction() {
+		$empresaid = $this->getRequest()->getParam('id_empresa');
+		try {
+			$model = Mage::getModel('distribuidor/empresa');
+			$empresa = $model->load($empresaid);
+			$empresa->setData('activo', 'Activa');
+			$empresa->save();
+			$wholesalerName = $empresa->getAdminName();
+			$wholesalerLastname = $empresa->getAdminLastname();
+			$activo = "Activo";
+			$correo = $empresa->getAdminCorreo();
+			$wholesaler = Mage::getModel('distribuidor/wholesaler');
+			$wholesaler->creaWholesaler($empresaid, $correo, $wholesalerName, $wholesalerLastname, $activo);
+			Mage::getSingleton('adminhtml/session')->addSuccess(
+				Mage::helper('distribuidor')->__('Empresa activada correctamente, se han activado las cuentas asociadas a ésta'));
+		} catch (Exception $e) {
+			Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
 
+		}
+		$this->_redirect('*/*/');
 	}
 
 	/**
 	 * Desactiva una empresa
 	 */
 	public function deactivateEmpresaAction() {
+		$emrpesaid = $this->getRequest()->getParam('id_empresa');
+		try {
+			$model = Mage::getModel('distribuidor/empresa');
+			$empresa = $model->load($empresaid);
+			$empresa->setData('activo', 'No activa');
+			$empresa->save();
+			Mage::getSingleton('adminhtml/session')->addSuccess(
+				Mage::helper('distribuidor')->__('Empresa desactivada correctamente'));
+		} catch (Exception $e) {
+			Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
 
+		}
+		$this->_redirect('*/*/');
 	}
 
 	/**
 	 * Mass action para activar empresas
 	 */
 	public function massActivateEmpresaAction() {
-
+		$empresaids = $this->getRequest()->getParam('empresa_id');
+		if (!is_array($empresaids)) {
+			Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('Por favor seleccione empresas'));
+		} else {
+			try {
+				$model = Mage::getModel('distribuidor/empresa');
+				foreach ($empresaids as $empresaid) {
+					$empresa = $model->load($empresaid);
+					$empresa->setData('activo', 'Activa');
+					$empresa->save();
+				}
+				Mage::getSingleton('adminhtml/session')->addSuccess(
+					Mage::helper('distribuidor')->__(
+						'Total de %d empresa(s) activadas.', count($empresaids)
+					)
+				);
+			} catch (Exception $e) {
+				Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+			}
+		}
+		$this->_redirect('*/*/');
 	}
 
 	/**
 	 * Mass action para desactivar empresas
 	 */
 	public function massDeactivateEmpresaAction() {
-
+		$empresaids = $this->getRequest()->getParam('empresa_id');
+		if (!is_array($empresaids)) {
+			Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('Por favor seleccione empresas'));
+		} else {
+			try {
+				$model = Mage::getModel('distribuidor/empresa');
+				foreach ($empresaids as $empresaid) {
+					$empresa = $model->load($empresaid);
+					$empresa->setData('activo', 'No Activa');
+					$empresa->save();
+				}
+				Mage::getSingleton('adminhtml/session')->addSuccess(
+					Mage::helper('distribuidor')->__(
+						'Total de %d empresa(s) desactivadas.', count($empresaids)
+					)
+				);
+			} catch (Exception $e) {
+				Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+			}
+		}
+		$this->_redirect('*/*/');
 	}
 
 }

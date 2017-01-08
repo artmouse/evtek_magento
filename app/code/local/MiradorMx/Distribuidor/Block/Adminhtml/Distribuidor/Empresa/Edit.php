@@ -105,7 +105,7 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Edit extends M
 				if ($estado == "No activa") {
 					$flag = false;
 				} elseif ($estado == "Activa") {
-					$flag == true;
+					$flag = true;
 				}
 			} else {
 				Mage::getSingleton('adminhtml/session')->addError(Mage::helper('distribuidor')->__('Esta empresa no existe'));

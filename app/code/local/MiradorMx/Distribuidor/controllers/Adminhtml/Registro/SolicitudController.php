@@ -128,7 +128,7 @@ class MiradorMx_Distribuidor_Adminhtml_Registro_SolicitudController extends Mage
 				}
 				Mage::getSingleton('adminhtml/session')->addSuccess(
 					Mage::helper('distribuidor')->__(
-						'Total de %d solicitud(es) en rechazadas.', count($solicitudesids)
+						'Total de %d solicitud(es) rechazadas.', count($solicitudesids)
 					)
 				);
 			} catch (Exception $e) {

@@ -132,14 +132,14 @@ class MiradorMx_Distribuidor_Block_Adminhtml_Distribuidor_Empresa_Manage_Grid ex
 			// la empresa está activada
 			$this->getMassactionBlock()->addItem('desactivar', array(
 				'label' => 'Desactivar empresa',
-				'url' => $this->getUrl('*/*/massDeactivateEmpresa', array('' => '')), // public function massRechazoAction() in SolicitudController.
+				'url' => $this->getUrl('*/*/massDeactivateEmpresa', array('' => '')), // public function massDeactivateEmpresaAction() in EmpresaController.
 				'confirm' => Mage::helper('distribuidor')->__('¿Está seguro de desactivar estas empresas? Al hacerlo se desactivarán todas las cuentas asociadas a éstas'),
 			));
 		} else {
 			//la emrpesa no está activada.
 			$this->getMassactionBlock()->addItem('activar', array(
 				'label' => 'Activar emrpesa',
-				'url' => $this->getUrl('*/*/massActivateEmpresa', array('' => '')), // public function massAcceptAction() in SolicitudController.
+				'url' => $this->getUrl('*/*/massActivateEmpresa', array('' => '')), // public function massAActivateEmpresaAction() in EmpresaController.
 				'confirm' => Mage::helper('distribuidor')->__('¿Está seguro de activar estas empresas? Al hacerlo se activarán todas las cuentás asocidas a éstas'),
 			));
 		}
