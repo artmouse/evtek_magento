@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<MiradorMx_CsmEvtek>
+			<active>true</active>
+			<codePool>local</codePool>
+		</MiradorMx_CsmEvtek>
+	</modules>
+</config>
