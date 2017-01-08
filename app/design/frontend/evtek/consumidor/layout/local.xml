@@ -9,6 +9,30 @@
      */
 -->
 <layout version="0.1.0">
-    <default></default>
-</layout>
+    <default translate="label" module="page">
+      <reference name="head">
+         <action method="addItem">
+            <type>skin_js</type><name>js/jquery.min.js</name>
+         </action>
+         <action method="addItem">
+            <type>skin_js</type><name>js/bootstrap.min.js</name>
+         </action>
+         <action method="addItem">
+            <type>skin_js</type><name>js/jquery.scripts.js</name>
+         </action>
 
+         <!-- Removing the style.css-->
+         <action method="removeItem">
+            <type>skin_css</type><name>css/styles.css</name>
+         </action>
+         <!-- Adding Bootstrap Css -->
+         <action method="addItem">
+            <stylesheet>css/bootstrap.css</stylesheet>
+         </action>
+         <!-- Adding the styles.css -->
+         <action method="addItem">
+            <stylesheet>css/styles.css</stylesheet>
+         </action>
+      </reference>
+    </default>
+</layout>
