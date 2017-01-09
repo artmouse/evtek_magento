@@ -18,7 +18,7 @@
             <type>skin_js</type><name>js/bootstrap.min.js</name>
          </action>
          <action method="addItem">
-            <type>skin_js</type><namejs/jquery.scripts.js</name>
+            <type>skin_js</type><name>js/jquery.scripts.js</name>
          </action>
 
          <!-- Removing the style.css-->
@@ -32,6 +32,9 @@
          <!-- Adding the styles.css -->
          <action method="addItem">
             <stylesheet>css/styles.css</stylesheet>
+         </action>
+         <action method="addItem">
+            <stylesheet>css/print.css</stylesheet>
          </action>
       </reference>
     </default>
