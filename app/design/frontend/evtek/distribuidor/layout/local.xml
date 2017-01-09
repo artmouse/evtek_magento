@@ -12,26 +12,26 @@
     <default translate="label" module="page">
       <reference name="head">
          <action method="addItem">
-            <type>skin_js</type><name>evtek/distribuidor/js/jquery.min.js</name>
+            <type>skin_js</type><name>js/jquery.min.js</name>
          </action>
          <action method="addItem">
-            <type>skin_js</type><name>evtek/distribuidor/js/bootstrap.min.js</name>
+            <type>skin_js</type><name>js/bootstrap.min.js</name>
          </action>
          <action method="addItem">
-            <type>skin_js</type><name>evtek/distribuidor/js/jquery.scripts.js</name>
+            <type>skin_js</type><namejs/jquery.scripts.js</name>
          </action>
 
          <!-- Removing the style.css-->
          <action method="removeItem">
-            <type>skin_css</type><name>evtek/distribuidor/css/styles.css</name>
+            <type>skin_css</type><name>css/styles.css</name>
          </action>
          <!-- Adding Bootstrap Css -->
          <action method="addItem">
-            <stylesheet>evtek/distribuidor/css/bootstrap.css</stylesheet>
+            <stylesheet>css/bootstrap.css</stylesheet>
          </action>
          <!-- Adding the styles.css -->
          <action method="addItem">
-            <stylesheet>evtek/distribuidor/css/styles.css</stylesheet>
+            <stylesheet>css/styles.css</stylesheet>
          </action>
       </reference>
     </default>
