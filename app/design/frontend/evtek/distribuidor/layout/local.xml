@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    /**
+     * local.xml
+     * Local layout modifications for local theme
+     * @category design
+     * @package evtek
+     * @copyright Copyright (c) 2016 Mariana  Valdivia
+     */
+-->
+<layout version="0.1.0">
+    <default translate="label" module="page">
+      <reference name="head">
+         <action method="addItem">
+            <type>skin_js</type><name>evtek/distribuidor/js/jquery.min.js</name>
+         </action>
+         <action method="addItem">
+            <type>skin_js</type><name>evtek/distribuidor/js/bootstrap.min.js</name>
+         </action>
+         <action method="addItem">
+            <type>skin_js</type><name>evtek/distribuidor/js/jquery.scripts.js</name>
+         </action>
+
+         <!-- Removing the style.css-->
+         <action method="removeItem">
+            <type>skin_css</type><name>evtek/distribuidor/css/styles.css</name>
+         </action>
+         <!-- Adding Bootstrap Css -->
+         <action method="addItem">
+            <stylesheet>evtek/distribuidor/css/bootstrap.css</stylesheet>
+         </action>
+         <!-- Adding the styles.css -->
+         <action method="addItem">
+            <stylesheet>evtek/distribuidor/css/styles.css</stylesheet>
+         </action>
+      </reference>
+    </default>
+</layout>
